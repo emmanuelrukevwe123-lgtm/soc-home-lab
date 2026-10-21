@@ -2,7 +2,7 @@
 
 A hands-on Security Operations Center lab built on one laptop, documented as I learn. It covers network segmentation, hardening, vulnerable targets and a SIEM, with real troubleshooting along the way.
 
-**Goal:** junior SOC analyst now, cloud security engineer next.
+**Goal:** junior SOC analyst now, then cloud security, with AI security as a specialisation.
 **Programme:** built during VAMP (28 days) with The Victor Akinode Foundation (AI & Cybersecurity) and Veenode Learn.
 
 ---
@@ -40,6 +40,7 @@ Everything else between zones is blocked and logged. Full details: [docs/archite
 | 4 | Time sync (NTP via pfSense), pfSense logs into Wazuh, Windows + Active Directory, Sysmon | Next |
 | 5 | Attack-and-detect loops (nmap, Hydra, SQL injection, Atomic Red Team), capstone report | Planned |
 | 6 | Cloud: rebuild the design in AWS and Azure; Microsoft Sentinel with KQL detections | Planned |
+| 7 | AI security: Ollama + Open WebUI in the DMZ, prompt injection and jailbreak testing (garak, promptfoo, PyRIT), RAG poisoning, AI prompt-log detections in Wazuh, Llama Guard defence (OWASP LLM Top 10, MITRE ATLAS) | Planned |
 
 Day-by-day notes: [progress-log.md](progress-log.md).
 
