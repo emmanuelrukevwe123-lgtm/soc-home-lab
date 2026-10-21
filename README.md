@@ -77,3 +77,7 @@ More in [screenshots/](screenshots/). Usernames and hostnames are blurred.
 HP ZBook (i7-8850H, 32 GB RAM), VMware Workstation Pro, VMs on an external SSD.
 
 > All attacks in this lab target only my own isolated machines. Vulnerable apps are never exposed to the internet.
+
+## License
+
+[MIT](./LICENSE) © 2026 Emmanuel Nwabuokei
