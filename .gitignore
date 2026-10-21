@@ -14,8 +14,6 @@ desktop.ini
 *.p12
 id_rsa*
 id_ed25519*
-*credentials*
-*password*
 
 # Large or private lab artifacts
 *.ova
