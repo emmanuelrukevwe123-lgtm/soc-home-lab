@@ -37,7 +37,7 @@ Everything else between zones is blocked and logged. Full details: [docs/archite
 | 1 | [Segmented network with pfSense](docs/phase-1-network.md) | Done |
 | 2 | [DMZ targets, SSH hardening, host firewall](docs/phase-2-dmz-targets.md) | Done |
 | 3 | [Wazuh SIEM and first detection](docs/phase-3-wazuh-siem.md) | Done |
-| 4 | [Time sync (NTP via pfSense)](docs/phase-4-ntp-time-sync.md) ✅ Wazuh synced;, pfSense logs into Wazuh, Windows + Active Directory, Sysmon | Next |
+| 4 | [Time sync (NTP via pfSense)](docs/phase-4-ntp-time-sync.md) (Wazuh synced ✅), then pfSense logs into Wazuh, Windows + Active Directory, Sysmon | Next |
 | 5 | Attack-and-detect loops (nmap, Hydra, SQL injection, Atomic Red Team), capstone report | Planned |
 | 6 | Cloud: rebuild the design in AWS and Azure; Microsoft Sentinel with KQL detections | Planned |
 | 7 | AI security: Ollama + Open WebUI in the DMZ, prompt injection and jailbreak testing (garak, promptfoo, PyRIT), RAG poisoning, AI prompt-log detections in Wazuh, Llama Guard defence (OWASP LLM Top 10, MITRE ATLAS) | Planned |
