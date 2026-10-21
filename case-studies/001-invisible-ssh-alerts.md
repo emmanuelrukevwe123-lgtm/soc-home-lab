@@ -70,7 +70,7 @@ sudo systemctl restart wazuh-manager
 
 ## Follow-up actions
 
-- [ ] Make pfSense the lab's NTP server and allow UDP 123 to it from each zone
+- [x] Make pfSense the lab's NTP server; Wazuh now syncs from it ([Phase 4.1](../docs/phase-4-ntp-time-sync.md)). DMZ server still to do.
 - [ ] Remove duplicate alerts (journald and auth.log both report the same event)
 - [ ] Make wazuh-manager wait for the indexer at boot
 
