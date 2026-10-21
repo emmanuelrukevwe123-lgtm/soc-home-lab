@@ -1,0 +1,28 @@
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+
+# Lab secrets: never commit credentials, keys or certificates
+.env
+*.pem
+*.key
+*.crt
+*.p12
+id_rsa*
+id_ed25519*
+*credentials*
+*password*
+
+# Large or private lab artifacts
+*.ova
+*.ovf
+*.vmdk
+*.vmx
+*.iso
+*.pcap
+*.pcapng
+raw-logs/
