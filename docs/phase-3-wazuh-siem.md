@@ -60,3 +60,17 @@ Getting this to show took a full investigation: [Case 001](../case-studies/001-i
 A **rule** is the detection logic. Rule 5710's parent is 5700 (SSH messages), and it matches `illegal user|invalid user`. An **alert** is one event that matched it, carrying the evidence: who, from where, and when.
 
 Evidence: [screenshots/phase-3](../screenshots/phase-3/)
+
+## Boot reliability fix (22 October)
+
+wazuh-manager failed on several boots. `journalctl -u wazuh-manager -b` showed `Failed with result 'timeout'`, and `systemctl show -p TimeoutStartUSec` showed **45 s**, too short while the indexer starts at the same time on a 4-CPU VM. Fixed with a systemd drop-in, `/etc/systemd/system/wazuh-manager.service.d/override.conf`:
+
+```ini
+[Unit]
+After=wazuh-indexer.service
+
+[Service]
+TimeoutStartSec=300
+```
+
+Then `sudo systemctl daemon-reload`. Verified that `TimeoutStartUSec=5min`, and a reboot brought all services up with no manual restart.

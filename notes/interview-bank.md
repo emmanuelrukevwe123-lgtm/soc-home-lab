@@ -28,3 +28,19 @@ It tracks each allowed connection in a state table, so I only allow the directio
 ## Why put web apps in a DMZ?
 
 They face attackers, so they sit in a low-trust buffer zone. Firewall rules let them reply to requests and fetch updates, but not start connections into internal zones. If one is compromised, the attacker is contained. In my lab, the DMZ server can reach only Wazuh's agent ports and the internet on 80/443.
+
+## A server can reach its time source but won't sync. What do you check?
+
+The service (chrony or timesyncd?), then the config (is it read? section names are case-sensitive), then reachability (chrony's Reach counter), then the selection logic (`chronyc selectdata`). In my lab, chrony was waiting for authenticated NTS sources that the firewall blocked, so it wouldn't select plain NTP from pfSense. I disabled the unreachable pool, in a way I could undo, and it synced.
+
+## Why sync from an internal time server rather than the internet?
+
+One source of truth, fewer firewall openings (least privilege), control over the source, and resilience if the internet drops. NTP works in UTC, so time zones are not the reason.
+
+## Why have a correlation rule instead of making every failed login high severity?
+
+Alert fatigue. Single failures are constant noise. A correlation rule fires on the pattern (8 failures from one IP in 2 minutes), which gives much higher confidence, so severity reflects how sure we are. Every rule has blind spots, though: `same_source_ip` misses distributed attacks and password spraying.
+
+## First five minutes on an SSH brute-force alert?
+
+Is the source IP internal or external, and what's its reputation? Which usernames were tried (real or guessed)? **Did any attempt succeed?** What else did the IP touch? How critical is the target? Then document, recommend blocking or monitoring, and escalate.

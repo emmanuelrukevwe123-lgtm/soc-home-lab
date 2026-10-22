@@ -55,8 +55,8 @@ Ubuntu 26.04 uses **chrony**, not systemd-timesyncd: `systemctl is-active chrony
 
 ## Next
 
-- [ ] Reboot test: Wazuh should come back synced with no manual fixes
+- [x] Reboot test passed: Wazuh came back synced (offset +885 µs) with no manual fixes
 - [x] Ubuntu DMZ server synced (see above)
-- [ ] Tighten the MGMT "to this firewall" rule to port 53
+- [x] MGMT "to this firewall" rule tightened to DNS (53); `dig` still resolves
 
 Evidence: [screenshots/phase-4](../screenshots/phase-4/)

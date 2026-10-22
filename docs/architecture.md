@@ -71,5 +71,4 @@ pfSense is the lab's NTP server. Wazuh (systemd-timesyncd) and the Ubuntu DMZ se
 
 ## Known gaps (tracked)
 
-- The MGMT rule to "This Firewall" allows every port. It should be limited to DNS (53).
 - Plain NTP is unauthenticated. That's acceptable in this isolated lab; production would use NTS.
