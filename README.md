@@ -13,7 +13,9 @@ A hands-on Security Operations Center lab built on one laptop, documented as I l
 - **Hardened target server:** Ubuntu in the DMZ running OWASP Juice Shop and DVWA in Docker. SSH uses keys only and is reachable only from the analyst machine.
 - **SIEM:** Wazuh 4.14.8 (indexer, manager, dashboard) in the management zone, with an agent on the DMZ server.
 - **First detection:** SSH login attempts from Kali raise Wazuh rule 5710, mapped to MITRE ATT&CK T1110.001 (Password Guessing).
-- **Real incident write-up:** [Case 001](case-studies/001-invisible-ssh-alerts.md). Alerts were generated and stored but invisible. I traced the pipeline hop by hop and found four stacked causes, ending with a SIEM clock running 1 hour ahead.
+- **Real incident write-up:** [Case 001](case-studies/001-invisible-ssh-alerts.md). Alerts were generated and stored but invisible. I traced the pipeline hop by hop to the root cause: a SIEM clock running 1 hour ahead. I later corrected one of my own conclusions when new evidence came in.
+- **Lab-wide time sync:** pfSense is the internal NTP server; Wazuh (systemd-timesyncd) and the DMZ server (chrony) both sync from it. ([Phase 4.1](docs/phase-4-ntp-time-sync.md))
+- **Alert hygiene:** found and removed a duplicate log source, so each SSH attempt now produces exactly one alert, verified by matching process ID and source port.
 
 ## Architecture
 
@@ -37,7 +39,7 @@ Everything else between zones is blocked and logged. Full details: [docs/archite
 | 1 | [Segmented network with pfSense](docs/phase-1-network.md) | Done |
 | 2 | [DMZ targets, SSH hardening, host firewall](docs/phase-2-dmz-targets.md) | Done |
 | 3 | [Wazuh SIEM and first detection](docs/phase-3-wazuh-siem.md) | Done |
-| 4 | [Time sync (NTP via pfSense)](docs/phase-4-ntp-time-sync.md) (Wazuh synced ✅), then pfSense logs into Wazuh, Windows + Active Directory, Sysmon | Next |
+| 4 | [Time sync via pfSense NTP](docs/phase-4-ntp-time-sync.md) ✅ · duplicate-alert fix ✅ · next: pfSense logs into Wazuh, Windows + Active Directory, Sysmon | In progress |
 | 5 | Attack-and-detect loops (nmap, Hydra, SQL injection, Atomic Red Team), capstone report | Planned |
 | 6 | Cloud: rebuild the design in AWS and Azure; Microsoft Sentinel with KQL detections | Planned |
 | 7 | AI security: Ollama + Open WebUI in the DMZ, prompt injection and jailbreak testing (garak, promptfoo, PyRIT), RAG poisoning, AI prompt-log detections in Wazuh, Llama Guard defence (OWASP LLM Top 10, MITRE ATLAS) | Planned |
@@ -49,6 +51,8 @@ Day-by-day notes: [progress-log.md](progress-log.md).
 | Wazuh rule 5710 matches the SSH attack | Alerts stored in the indexer |
 | --- | --- |
 | ![Ruleset Test](screenshots/phase-3/07-ruleset-test-5710.png) | ![Indexer indices](screenshots/phase-3/10-indexer-indices.png) |
+| **Wazuh clock synced from pfSense** | **One SSH attempt = one alert** |
+| ![NTP synced](screenshots/phase-4/01-wazuh-ntp-synced.png) | ![One alert](screenshots/phase-4/05-one-attempt-one-alert.png) |
 | **Juice Shop running in the DMZ** | **Containers on the DMZ server** |
 | ![Juice Shop](screenshots/phase-2/03-juice-shop.png) | ![docker ps](screenshots/phase-2/02-docker-ps.png) |
 

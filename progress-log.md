@@ -23,3 +23,5 @@ Newest first.
 | Ubuntu DMZ | `ubuntu-03-docker-apps` | Docker apps running |
 | Ubuntu DMZ | `ubuntu-05-wazuh-agent` | Agent enrolled, reading auth.log |
 | Wazuh | `wazuh-02-first-detection` | First detection working |
+| Wazuh | `latest ntp sync` (22 Oct) | Synced from pfSense via timesyncd |
+| pfSense | `ntp rules` (22 Oct) | NTP server on, MGMT and DMZ NTP rules |
