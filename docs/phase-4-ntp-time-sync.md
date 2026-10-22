@@ -41,10 +41,22 @@ timedatectl timesync-status
 - **Section names are case-sensitive.** `[TIME]` was silently ignored, so the service kept using its default server. `[Time]` worked. The evidence was `Server: ntp.ubuntu.com` and `Packet count: 0`.
 - **Heredocs need a new line after each line of text.** Typed on one line, the shell waits for `EOF` forever.
 
+## The Ubuntu DMZ server: chrony
+
+Ubuntu 26.04 uses **chrony**, not systemd-timesyncd: `systemctl is-active chrony systemd-timesyncd` printed `active` then `inactive`. Never assume; check.
+
+1. DMZ rule at the top of the DMZ tab: Pass · UDP · DMZ subnets → DMZ address · port 123.
+2. Added pfSense as a source: `echo "server 10.0.2.1 iburst prefer" | sudo tee /etc/chrony/sources.d/pfsense.sources`, then `sudo chronyc reload sources`.
+3. **Problem:** pfSense (`_gateway`) was reachable (Reach 177) but never selected (`~` in `chronyc sources`). `sudo chronyc selectdata` showed Auth **N** with state **W** (waiting), while Ubuntu's default sources were **NTS** (authenticated) servers marked `prefer`. Those need TCP 4460 out, which the DMZ blocks.
+4. **Fix:** the design says lab servers sync only from pfSense, so the Ubuntu NTS pool was disabled reversibly: `sudo mv .../ubuntu-ntp-pools.sources .../ubuntu-ntp-pools.sources.disabled`, then `chronyc reload sources` and `sudo chronyc makestep`.
+5. **Result:** `^* _gateway`, Reach 377, Reference ID `0A000201` (10.0.2.1 in hex), stratum 4, leap status Normal, and an offset of 0.89 s corrected.
+
+**Trade-off:** NTS (Network Time Security) authenticates time so it can't be spoofed. Inside this isolated lab, plain NTP from pfSense is acceptable. In production, run NTS internally or allow TCP 4460 out.
+
 ## Next
 
 - [ ] Reboot test: Wazuh should come back synced with no manual fixes
-- [ ] Same change for the Ubuntu DMZ server (check whether it uses chrony or timesyncd), plus a DMZ rule for UDP 123 to the DMZ address
+- [x] Ubuntu DMZ server synced (see above)
 - [ ] Tighten the MGMT "to this firewall" rule to port 53
 
 Evidence: [screenshots/phase-4](../screenshots/phase-4/)

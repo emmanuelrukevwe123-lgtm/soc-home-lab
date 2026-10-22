@@ -4,6 +4,7 @@ Newest first.
 
 | Date | Session | What I did | Key lesson |
 | --- | --- | --- | --- |
+| 2026-10-22 | Session 3: DMZ time + alert hygiene | Ubuntu DMZ synced from pfSense via chrony (disabled the unreachable NTS pool); removed the duplicate auth.log source, so 1 attempt = 1 alert; corrected Case 001 | Check which service is running; deduplicate on PID + port; correct reports when evidence changes |
 | 2026-10-22 | Session 2: NTP | pfSense as the lab time server; MGMT NTP rule; Wazuh synced via systemd-timesyncd (corrected −59 min 59.78 s) | Config section names are case-sensitive; a fix must survive a reboot |
 | 2026-10-21 | Notes and portfolio | Wrote up networking fundamentals; created this repository | Documentation is part of the job |
 | 2026-10-20 | Session 1: TCP/IP + first detection | Fixed agent collection, manager crash and SIEM clock skew; rule 5710 alerts visible | Trace the pipeline hop by hop; check the time on every machine |

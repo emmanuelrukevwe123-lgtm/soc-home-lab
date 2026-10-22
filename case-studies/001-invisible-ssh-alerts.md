@@ -29,7 +29,7 @@ auth.log → agent collects → agent sends (TCP 1514) → manager rules → ale
 | # | Hypothesis | Test | Result |
 | --- | --- | --- | --- |
 | 1 | Ubuntu 26.04 logs as `sshd-session`, so Wazuh's SSH decoder doesn't match | Pasted the raw log line into Wazuh's **Ruleset Test** | **Disproved.** The `sshd` decoder extracted `srcip` and `srcuser`, and rule 5710 fired. No custom rule needed. |
-| 2 | The agent isn't reading the log file | `grep "auth.log" /var/ossec/logs/ossec.log` | **Confirmed.** The agent monitored journald only. Added a `<localfile>` entry for `/var/log/auth.log`. |
+| 2 | The agent isn't reading the log file | `grep "auth.log" /var/ossec/logs/ossec.log` | *At the time:* believed confirmed, since the agent monitored journald only, so I added auth.log. **Later disproved (22 Oct):** journald was already delivering SSH events. See the correction below. |
 | 3 | The dashboard can't reach the manager ("Check API connection") | `systemctl is-active wazuh-manager` | **Confirmed.** The manager had crashed at boot. Restarted it and verified the API was listening on port 55000. |
 | 4 | The agent isn't connected | Read `wazuh-agentd.state` | Ruled out: `status='connected'`, recent `last_ack`. |
 | 5 | The manager isn't generating alerts | `grep fakeuser /var/ossec/logs/alerts/alerts.log` and `alerts.json` | Ruled out: alerts present (65 matching lines in alerts.json). |
@@ -39,7 +39,7 @@ auth.log → agent collects → agent sends (TCP 1514) → manager rules → ale
 
 ## Root causes
 
-1. **Collection gap:** the agent only read journald, not `/var/log/auth.log`.
+1. ~~Collection gap~~ **Withdrawn.** Journald was already collecting SSH events (see the correction below).
 2. **Service failure:** wazuh-manager failed at boot.
 3. **Clock skew (main cause):** the Wazuh VM clock was exactly 1 hour ahead. Windows keeps the hardware clock in local time (Lagos, UTC+1), and the Linux VM read it as UTC.
 4. **Why it never self-corrected:** NTP (UDP 123) is blocked by my own MGMT firewall rules, so the VM couldn't sync time.
@@ -71,8 +71,19 @@ sudo systemctl restart wazuh-manager
 ## Follow-up actions
 
 - [x] Make pfSense the lab's NTP server; Wazuh now syncs from it ([Phase 4.1](../docs/phase-4-ntp-time-sync.md)). DMZ server still to do.
-- [ ] Remove duplicate alerts (journald and auth.log both report the same event)
+- [x] Remove duplicate alerts: the auth.log source was removed, so each SSH attempt now gives one alert from journald
 - [ ] Make wazuh-manager wait for the indexer at boot
+
+## Correction (22 October 2026)
+
+Re-reading the evidence overturned root cause 1. On 20 October, `alerts.log` already contained SSH alerts in the journald format (`Oct 20 02:28:48 ...`) as well as the auth.log format (`2026-10-20T02:28:48.658051+00:00 ...`). So **journald was collecting SSH events all along**, and adding auth.log only created a **duplicate alert for every attempt**.
+
+**Proof:** one SSH attempt (`sshd-session[4027]`, source port 36664) appeared twice, with `location: journald` and `location: /var/log/auth.log`. After removing the auth.log `<localfile>` (with a backup of `ossec.conf` first), a new attempt on source port 46654 produced exactly **1 hit**, from journald.
+
+**Lessons:**
+- Correct a report when new evidence appears, rather than defending the first conclusion.
+- Deduplicate on a fingerprint that identifies one event: the process ID plus the source port.
+- Duplicates matter. A rule counting 8 failures in 2 minutes would have fired after only 4 real attempts.
 
 ## Evidence
 
