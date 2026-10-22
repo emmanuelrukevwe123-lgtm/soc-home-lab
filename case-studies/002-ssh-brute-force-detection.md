@@ -2,7 +2,7 @@
 
 **Date:** 22 October 2026
 **Systems:** Kali (attacker, 10.0.1.101) → Ubuntu DMZ server (agent `ubuntu-dmz`) → Wazuh 4.14.8
-**Outcome:** 10 failed logins produced 10 low-severity alerts and **one level-10 brute-force alert**. A detection gap and a past false positive were identified.
+**Outcome:** 10 failed logins produced 10 low-severity alerts and **one level-10 brute-force alert**. A detection gap was identified, and a past false positive was confirmed and traced to duplicate logs.
 
 ## Summary
 
@@ -49,7 +49,7 @@ The 5712 alert carries `previous_output`, the individual attempts that made up t
 ## Findings
 
 1. **Detection gap: distributed attacks.** `same_source_ip: true` means an attacker who spreads attempts across many IPs, staying under 8 per IP, would not trigger 5712. The same goes for **password spraying** (T1110.003): one password against many accounts, slowly. *Follow-up:* write and test a custom rule that counts failures per target account or across sources.
-2. **Past false positive (to verify).** A second 5712 alert fired at 01:13 the previous night, during the duplicate-log testing (Case 001 correction). Only a few attempts were made then, but each was counted twice (journald and auth.log), which likely pushed the count past 8. *Verification:* the alert's `previous_output` should show the same attempts in both log formats. **Lesson:** duplicate log sources don't just add noise; they can trip correlation rules.
+2. **Confirmed false positive caused by duplicate logs.** A second 5712 alert fired at 01:13 the previous night, during the duplicate-log testing (Case 001 correction). Only a few attempts were made then. Its `previous_output` showed **the same attempts in both log formats**, journald (`Oct 22 00:13:49 …`) and auth.log (`2026-10-22T00:13:49.27…`). Each attempt was counted twice, which pushed the count past the threshold of 8 and fired a brute-force alert that a real count would not have triggered. **Root cause:** a duplicate log source. **Fix:** the duplicate was removed in Session 3, and the test in this case (10 attempts → 1 correct 5712) was run afterwards. **Lesson:** duplicate log sources don't just add noise; they inflate correlation counts and create false positives.
 
 ## Triage playbook (first five minutes on a 5712 alert)
 
