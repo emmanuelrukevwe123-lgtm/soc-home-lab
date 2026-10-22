@@ -36,7 +36,7 @@ sudo WAZUH_MANAGER='10.0.3.10' WAZUH_AGENT_NAME='ubuntu-dmz' dpkg -i ./wazuh-age
 sudo systemctl daemon-reload && sudo systemctl enable --now wazuh-agent
 ```
 
-Then I added `/var/log/auth.log` to the agent's collection (see Case 001).
+The agent collects SSH events from journald (Ubuntu's default). I briefly added `/var/log/auth.log` as well, which created duplicate alerts, so I later removed it (see Case 001).
 
 ## First detection
 

@@ -65,7 +65,11 @@ pfSense tracks each allowed connection in a state table, so replies are allowed 
 - ufw: deny all incoming, allow SSH only from 10.0.1.101.
 - Note: Docker-published ports bypass ufw, so pfSense is the real control for the web apps.
 
+## Time sync
+
+pfSense is the lab's NTP server. Wazuh (systemd-timesyncd) and the Ubuntu DMZ server (chrony) sync from it through UDP 123 rules on the MGMT and DMZ tabs. See [Phase 4.1](phase-4-ntp-time-sync.md).
+
 ## Known gaps (tracked)
 
-- NTP (UDP 123) is blocked from MGMT, so the Wazuh clock drifts (see [Case 001](../case-studies/001-invisible-ssh-alerts.md)). The fix is to make pfSense the lab's time server.
-- The Wazuh agent collects SSH events from both journald and auth.log, which creates duplicate alerts.
+- The MGMT rule to "This Firewall" allows every port. It should be limited to DNS (53).
+- Plain NTP is unauthenticated. That's acceptable in this isolated lab; production would use NTS.
