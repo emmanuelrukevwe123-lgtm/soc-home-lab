@@ -16,6 +16,7 @@ A hands-on Security Operations Center lab built on one laptop, documented as I l
 - **Real incident write-up:** [Case 001](case-studies/001-invisible-ssh-alerts.md). Alerts were generated and stored but invisible. I traced the pipeline hop by hop to the root cause: a SIEM clock running 1 hour ahead. I later corrected one of my own conclusions when new evidence came in.
 - **Lab-wide time sync:** pfSense is the internal NTP server; Wazuh (systemd-timesyncd) and the DMZ server (chrony) both sync from it. ([Phase 4.1](docs/phase-4-ntp-time-sync.md))
 - **Brute-force detection:** 10 SSH attempts from Kali raised a level-10 correlation alert (rule 5712, T1110), plus a detection gap for distributed attacks. ([Case 002](case-studies/002-ssh-brute-force-detection.md))
+- **Detection engineering:** wrote a custom Wazuh rule (100100) that catches low-and-slow SSH guessing the built-in rule misses, and proved it: 5712 silent, 100100 fired at level 10. ([Case 003](case-studies/003-custom-rule-low-and-slow-ssh.md), [rule file](detections/wazuh/local_rules.xml))
 - **Alert hygiene:** found and removed a duplicate log source, so each SSH attempt now produces exactly one alert, verified by matching process ID and source port.
 
 ## Architecture
@@ -73,6 +74,7 @@ More in [screenshots/](screenshots/). Usernames and hostnames are blurred.
 | Path | Contents |
 | --- | --- |
 | [docs/](docs/) | Architecture and the build guide for each phase |
+| [detections/](detections/) | Custom detection rules, each documented and tested |
 | [case-studies/](case-studies/) | Incident-style write-ups of real problems I solved |
 | [notes/](notes/) | Networking fundamentals, command cheat sheet, interview answers |
 | [screenshots/](screenshots/) | Evidence from each phase (usernames and hostnames blurred) |

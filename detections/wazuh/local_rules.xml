@@ -1,0 +1,23 @@
+<!--
+  Custom Wazuh rules for the SOC home lab.
+  Deployed on the Wazuh manager at /var/ossec/etc/rules/local_rules.xml
+  (Server management > Rules > Custom rules). Custom rule IDs start at 100000.
+-->
+
+<!--
+  100100: Low-and-slow or distributed SSH guessing
+  Gap closed: built-in rule 5712 needs 8 invalid-user attempts from the SAME IP
+  within 120 s, so an attacker who slows down or spreads across IPs evades it.
+  This rule counts 12+ attempts within 300 s from ANY source.
+  Tested: Case 002/003 (7 attempts, 130 s pause, 7 attempts -> 5712 silent, 100100 fired).
+  MITRE ATT&CK: T1110 Brute Force (Credential Access)
+-->
+<group name="local,sshd,authentication_failures,">
+  <rule id="100100" level="10" frequency="12" timeframe="300" ignore="120">
+    <if_matched_sid>5710</if_matched_sid>
+    <description>sshd: low-and-slow or distributed SSH guessing - 12+ invalid-user attempts in 5 minutes (any source)</description>
+    <mitre>
+      <id>T1110</id>
+    </mitre>
+  </rule>
+</group>

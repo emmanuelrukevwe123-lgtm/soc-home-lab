@@ -4,6 +4,7 @@ Newest first.
 
 | Date | Session | What I did | Key lesson |
 | --- | --- | --- | --- |
+| 2026-10-22 | Session 5: detection engineering | Wrote custom rule 100100 (12+ invalid users in 5 min, any source); low-and-slow attack evaded 5712 but fired 100100 at level 10 | Hypothesis → rule → true-positive test → false-positive test → document |
 | 2026-10-22 | Session 4: brute-force detection | Reboot test passed (NTP); fixed the manager boot crash (45 s start timeout → systemd drop-in, 300 s); tightened MGMT rule to DNS 53; triggered rule 5712 (level 10) with a Bash loop | Find the root cause of recurring failures; correlation raises confidence; every rule has blind spots |
 | 2026-10-22 | Session 3: DMZ time + alert hygiene | Ubuntu DMZ synced from pfSense via chrony (disabled the unreachable NTS pool); removed the duplicate auth.log source, so 1 attempt = 1 alert; corrected Case 001 | Check which service is running; deduplicate on PID + port; correct reports when evidence changes |
 | 2026-10-22 | Session 2: NTP | pfSense as the lab time server; MGMT NTP rule; Wazuh synced via systemd-timesyncd (corrected −59 min 59.78 s) | Config section names are case-sensitive; a fix must survive a reboot |
