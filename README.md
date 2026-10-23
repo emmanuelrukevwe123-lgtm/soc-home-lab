@@ -1,8 +1,8 @@
-# SOC Home Lab: from segmented network to first detection
+# SOC → Cloud Security Home Lab
 
 A hands-on Security Operations Center lab built on one laptop, documented as I learn. It covers network segmentation, hardening, vulnerable targets and a SIEM, with real troubleshooting along the way.
 
-**Goal:** junior SOC analyst now, then cloud security, with AI security as a specialisation.
+**Goal:** Cloud Security Engineer, entering through a SOC role. **Primary cloud:** Azure; **second cloud:** AWS. Full plan: [ROADMAP.md](ROADMAP.md).
 **Programme:** built during VAMP (28 days) with The Victor Akinode Foundation (AI & Cybersecurity) and Veenode Learn.
 
 ---
@@ -36,15 +36,24 @@ Everything else between zones is blocked and logged. Full details: [docs/archite
 
 ## Progress
 
+The lab is growing into a **hybrid on-prem + Azure** environment: [Lab v2 design](docs/lab-v2.md).
+
 | Phase | What | Status |
 | --- | --- | --- |
-| 1 | [Segmented network with pfSense](docs/phase-1-network.md) | Done |
-| 2 | [DMZ targets, SSH hardening, host firewall](docs/phase-2-dmz-targets.md) | Done |
-| 3 | [Wazuh SIEM and first detection](docs/phase-3-wazuh-siem.md) | Done |
-| 4 | [Time sync via pfSense NTP](docs/phase-4-ntp-time-sync.md) ✅ · duplicate-alert fix ✅ · next: pfSense logs into Wazuh, Windows + Active Directory, Sysmon | In progress |
-| 5 | Attack-and-detect loops: [SSH brute force](case-studies/002-ssh-brute-force-detection.md) ✅, then nmap, Hydra, SQL injection, Atomic Red Team, capstone report | In progress |
-| 6 | Cloud: rebuild the design in AWS and Azure; Microsoft Sentinel with KQL detections | Planned |
-| 7 | AI security: Ollama + Open WebUI in the DMZ, prompt injection and jailbreak testing (garak, promptfoo, PyRIT), RAG poisoning, AI prompt-log detections in Wazuh, Llama Guard defence (OWASP LLM Top 10, MITRE ATLAS) | Planned |
+| 1 | [Segmented network with pfSense](docs/phase-1-network.md) | ✅ Done |
+| 2 | [DMZ targets, SSH hardening, host firewall](docs/phase-2-dmz-targets.md) | ✅ Done |
+| 3 | [Wazuh SIEM and first detection](docs/phase-3-wazuh-siem.md) | ✅ Done |
+| 4 | [Lab reliability: NTP via pfSense, duplicate-alert fix](docs/phase-4-ntp-time-sync.md) | ✅ Done |
+| 5 | Detection engineering: [SSH brute force](case-studies/002-ssh-brute-force-detection.md) ✅, [custom rule 100100](case-studies/003-custom-rule-low-and-slow-ssh.md) ✅; next: pfSense logs, network scans, web attacks | 🔄 In progress |
+| 6 | Windows, Active Directory and endpoint security (new CORP zone, Sysmon, vulnerability detection, backups, monthly report) | Next |
+| 7 | Virtualization and containers (Docker hardening, image scanning, k3s) | Next |
+| 8 | Azure foundations: hub-and-spoke landing zone with Terraform | Planned |
+| 9 | Cloud identity and data security (Entra ID, RBAC, PIM, Key Vault, Azure Policy, Defender for Cloud) | Planned |
+| 10 | Cloud detection: Sentinel as a hybrid SIEM, KQL versions of the lab rules | Planned |
+| 11 | Cloud incident response and automation | Planned |
+| 12 | AWS: the same design, plus CloudTrail, GuardDuty, Security Hub, Prowler | Planned |
+| 13 | AI security | Planned |
+| ★ | Capstone: secure 3-tier Azure app, monitored end to end, with a simulated incident | Planned |
 
 Day-by-day notes: [progress-log.md](progress-log.md).
 
@@ -76,7 +85,7 @@ More in [screenshots/](screenshots/). Usernames and hostnames are blurred.
 | [docs/](docs/) | Architecture and the build guide for each phase |
 | [detections/](detections/) | Custom detection rules, each documented and tested |
 | [case-studies/](case-studies/) | Incident-style write-ups of real problems I solved |
-| [notes/](notes/) | Networking fundamentals, command cheat sheet, interview answers |
+| [notes/](notes/) | Study guides (networking, virtualization & containers, cloud security), cheat sheet, interview answers |
 | [screenshots/](screenshots/) | Evidence from each phase (usernames and hostnames blurred) |
 | [posts/](posts/) | The carousels I shared on LinkedIn and X |
 
