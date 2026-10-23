@@ -3,6 +3,7 @@
 **Target (by December 2027):** working in, or fully ready for, **Cloud Detection & Response (CDR)**: a cloud SOC analyst, cloud detection engineer or cloud incident responder role, on the way to Cloud Security Engineer.
 **Window:** November 2026 → December 2027 (about 15 months).
 **Primary cloud:** Azure (Sentinel, Defender for Cloud, Entra ID). **AWS:** concepts only for now; hands-on after the target.
+**Degree:** BSc Cybersecurity, graduating early 2028. The CDR target lands just before graduation, so I finish with a degree, certs, a portfolio and (ideally) work experience at the same time.
 
 > **This is a guide, not a contract.** Dates are aims. If a quarter slips, push the next one back or drop a "nice to have". The only fixed things are the order (foundations before cloud) and the habit (a little progress every week, written up).
 
@@ -42,7 +43,7 @@ Sep 2027 ─ Dec 2027   Q4  Cloud detection & response → SC-200 ✔ → apply 
 | AD detections: failed logons (4625), new accounts (4720), group changes, suspicious PowerShell | Wazuh vulnerability detection and SCA report |
 | Free Azure account, secured (MFA, budget alerts, separate admin) | Backup and tested restore |
 | Guide 3 Part A (cloud foundations) | Monthly security report template |
-| First Terraform: a VNet with subnets and NSGs, built and destroyed | |
+| First Terraform: a VNet with subnets and NSGs, built and destroyed (Terraform is the core Cloud Security Engineer skill, so keep using it every quarter) | |
 | **AZ-900 (aim: April)** | |
 | **Start applying for SOC analyst roles (from March)** | |
 
@@ -92,6 +93,8 @@ Check exam versions and prices on the official sites before booking.
 | From Mar 2027 | Apply for SOC analyst roles (local, remote-friendly, international). Keep posting on LinkedIn. |
 | Mid-2027 | **Aim:** first security role. Even part-time, contract or internship experience counts. |
 | From Oct 2027 | Apply for cloud SOC, detection engineering and CDR roles, using the capstone and SC-200 |
+| Early 2028 | Graduate. Apply for international roles (UK and Europe) that sponsor visas, as a graduate with certs, a portfolio and experience |
+| 2028 | AZ-500 + AWS; move toward **Cloud Security Engineer** (Terraform, policy as code, posture management) |
 
 If a SOC job arrives early, **take it**. The plan slows down, but real experience is worth more than any quarter of lab work.
 
