@@ -2,7 +2,7 @@
 
 A hands-on Security Operations Center lab built on one laptop, documented as I learn. It covers network segmentation, hardening, vulnerable targets and a SIEM, with real troubleshooting along the way.
 
-**Goal:** Cloud Security Engineer, entering through a SOC role. **Primary cloud:** Azure; **second cloud:** AWS. Full plan: [ROADMAP.md](ROADMAP.md).
+**Goal:** Cloud Detection & Response by December 2027, on the way to Cloud Security Engineer. **Primary cloud:** Azure; **second cloud:** AWS. Full plan: [ROADMAP.md](ROADMAP.md).
 **Programme:** built during VAMP (28 days) with The Victor Akinode Foundation (AI & Cybersecurity) and Veenode Learn.
 
 ---
@@ -51,8 +51,8 @@ The lab is growing into a **hybrid on-prem + Azure** environment: [Lab v2 design
 | 9 | Cloud identity and data security (Entra ID, RBAC, PIM, Key Vault, Azure Policy, Defender for Cloud) | Planned |
 | 10 | Cloud detection: Sentinel as a hybrid SIEM, KQL versions of the lab rules | Planned |
 | 11 | Cloud incident response and automation | Planned |
-| 12 | AWS: the same design, plus CloudTrail, GuardDuty, Security Hub, Prowler | Planned |
-| 13 | AI security | Planned |
+| 12 | AWS: the same design, plus CloudTrail, GuardDuty, Security Hub, Prowler | 2028 |
+| 13 | AI security | 2028 |
 | ★ | Capstone: secure 3-tier Azure app, monitored end to end, with a simulated incident | Planned |
 
 Day-by-day notes: [progress-log.md](progress-log.md).

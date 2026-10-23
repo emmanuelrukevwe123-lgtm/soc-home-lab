@@ -79,6 +79,9 @@ A full Windows session (pfSense, Kali, Wazuh, DC and client) uses about **21–2
 
 ## Phases
 
+Timeline: see the quarter-by-quarter plan in [ROADMAP.md](../ROADMAP.md). Phases 1–11 and the capstone fit November 2026 to December 2027; phases 12–13 follow in 2028.
+
+
 | # | Phase | Key outcomes | Status |
 | --- | --- | --- | --- |
 | 1 | [Segmented network](phase-1-network.md) | pfSense, three zones, aliases, least-privilege rules | ✅ Done |
@@ -92,8 +95,8 @@ A full Windows session (pfSense, Kali, Wazuh, DC and client) uses about **21–2
 | 9 | **Cloud identity and data security** | Entra ID users and groups; MFA and Conditional Access as a small business would use them; email authentication (SPF, DKIM, DMARC); RBAC least privilege; managed identities; Conditional Access and PIM (trial); Key Vault; encryption at rest and in transit; Azure Policy; Defender for Cloud recommendations | Planned |
 | 10 | **Cloud detection (hybrid SIEM)** | Log Analytics and Sentinel; onboard the on-prem Ubuntu with Azure Arc; KQL rewrites of the lab's Wazuh rules (5712, 100100); Entra ID sign-in detections | Planned |
 | 11 | **Cloud incident response** | Simulated incidents (leaked credential, exposed storage, compromised VM); isolate, preserve evidence (disk snapshots), revoke and rotate; an automated Sentinel playbook | Planned |
-| 12 | **AWS** | The same design in AWS with Terraform (VPC, security groups, IAM roles, S3, EC2); CloudTrail, GuardDuty, Config, Security Hub; a posture scan with Prowler | Planned |
-| 13 | **AI security** | Local LLM (Ollama) in the DMZ; prompt-injection testing; AI prompt-log detections; mapped to the OWASP LLM Top 10 and MITRE ATLAS | Planned |
+| 12 | **AWS** *(2028, after the CDR target)* | The same design in AWS with Terraform (VPC, security groups, IAM roles, S3, EC2); CloudTrail, GuardDuty, Config, Security Hub; a posture scan with Prowler | Planned |
+| 13 | **AI security** *(2028)* | Local LLM (Ollama) in the DMZ; prompt-injection testing; AI prompt-log detections; mapped to the OWASP LLM Top 10 and MITRE ATLAS | Planned |
 | ★ | **Capstone** | A secure 3-tier app in Azure (Terraform), monitored by Sentinel together with the on-prem lab, then a simulated incident investigated end to end and written up | Planned |
 
 ## Repo layout as the lab grows
