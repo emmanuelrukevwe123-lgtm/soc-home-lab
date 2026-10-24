@@ -2,7 +2,7 @@
 
 A hands-on Security Operations Center lab built on one laptop, documented as I learn. It covers network segmentation, hardening, vulnerable targets and a SIEM, with real troubleshooting along the way.
 
-**Goal:** comfortable building on AWS and Azure by February 2027, then cloud security through 2027, aiming for Cloud Security Engineer / Cloud Detection & Response roles. **Primary cloud:** AWS; **second cloud:** Azure. Sprint plan: [ROADMAP.md](ROADMAP.md).
+**Goal:** job-ready in cloud security by April 2027 without dropping blue teaming (SOC, detection, incident response). AWS first, Azure second. Plan: [ROADMAP.md](ROADMAP.md) and the two PDFs in [plan/](plan/).
 **Programme:** built during VAMP (28 days) with The Victor Akinode Foundation (AI & Cybersecurity) and Veenode Learn.
 
 ---

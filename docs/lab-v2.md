@@ -6,7 +6,7 @@ Lab v2 keeps everything already built (pfSense, Kali, the Ubuntu DMZ server and 
 2. **Azure (second cloud):** the same basics rebuilt in Azure, then Defender for Cloud and Sentinel.
 3. **On-prem:** a **CORP** zone with Windows Server (Active Directory) and a Windows 11 client, built as part of the SOC thread.
 
-Timeline: [ROADMAP.md](../ROADMAP.md) (sprints S1–S9, then B1–B10).
+Timeline and projects: [ROADMAP.md](../ROADMAP.md) and the plan PDFs in [plan/](../plan/). The phase table below is the long-term view; the 6-month plan's projects P1–P13 cover phases 5–15.
 
 ## Architecture
 
