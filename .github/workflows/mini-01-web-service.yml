@@ -10,15 +10,19 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      ADMIN_PASSWORD: ci-test-password-not-a-secret   # throwaway login, only for this test container
     defaults:
       run:
         working-directory: mini-projects/01-hardened-web-service
     steps:
       - uses: actions/checkout@v5
       - name: Lint shell scripts
-        run: shellcheck -S warning deploy.sh check.sh
+        run: shellcheck -S warning *.sh
       - name: Validate compose file
         run: docker compose config -q
+      - name: Create lab CA, certificate and admin login
+        run: ./make-certs.sh && ./make-user.sh
       - name: Deploy
         run: ./deploy.sh
       - name: Security checks
