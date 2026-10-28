@@ -7,7 +7,7 @@ Small, finished builds (2–5 hours each) that make the fundamentals stick: syst
 | 01 | [Hardened, monitored web service](01-hardened-web-service/) (Docker + HTTPS from my own CA + login + pfSense + Wazuh + CI) · **2 days** | Every topic in stages 1–4: systems, Linux, networking, security fundamentals | 🔄 28–29 Oct |
 | 02 | Linux log detective: a Bash script that reports failed SSH logins, top source IPs and successes after failures | Linux, Bash, logs, blue team | Next |
 | 03 | Subnet calculator + lab inventory: Python (`ipaddress`) plus nmap XML parsed into a Markdown asset list | Networking, Python | Planned |
-| 04 | Build your own certificate authority with OpenSSL; HTTPS on mini-01; inspect the TLS handshake in Wireshark | Cryptography, PKI, TLS | Planned |
+| 04 | Linux hardening audit with Lynis: score the Ubuntu server, fix the top findings, re-score | Linux, systems, security | Planned |
 | 05 | Firewall rules as tests: an allow/deny matrix for the pfSense zones, checked by a script | Networking, security testing | Planned |
 | 06 | Container image scanning with Trivy, then add it to CI | Containers, DevSecOps | Planned |
 | 07 | DNS deep dive: `dig`, pfSense resolver logs, spotting suspicious lookups | Networking, blue team | Planned |
