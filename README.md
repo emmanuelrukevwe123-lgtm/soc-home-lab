@@ -83,6 +83,7 @@ More in [screenshots/](screenshots/). Usernames and hostnames are blurred.
 | [case-studies/](case-studies/) | Incident-style write-ups of real problems I solved |
 | [notes/](notes/) | Study guides (networking, virtualization & containers, cloud security, cloud engineering sprint workbook), cheat sheet, interview answers |
 | [screenshots/](screenshots/) | Evidence from each phase (usernames and hostnames blurred) |
+| [mini-projects/](mini-projects/) | A small build every 1–2 days to practise the fundamentals |
 | [posts/](posts/) | The carousels I shared on LinkedIn and X |
 
 ## Lab hardware

@@ -1,0 +1,31 @@
+# CI for mini-project 01: lint the scripts, deploy the container, prove the hardening.
+name: mini-01 hardened web service
+on:
+  push:
+    paths: ["mini-projects/01-hardened-web-service/**", ".github/workflows/mini-01-web-service.yml"]
+  pull_request:
+    paths: ["mini-projects/01-hardened-web-service/**"]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mini-projects/01-hardened-web-service
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint shell scripts
+        run: shellcheck -S warning deploy.sh check.sh
+      - name: Validate compose file
+        run: docker compose config -q
+      - name: Deploy
+        run: ./deploy.sh
+      - name: Security checks
+        run: ./check.sh
+      - name: Show container logs on failure
+        if: failure()
+        run: docker logs secure-web || true
+      - name: Clean up
+        if: always()
+        run: docker compose down
