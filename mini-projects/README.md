@@ -4,7 +4,7 @@ Small, finished builds (2–5 hours each) that make the fundamentals stick: syst
 
 | # | Mini-project | Fundamentals | Status |
 | --- | --- | --- | --- |
-| 01 | [Hardened, monitored web service](01-hardened-web-service/) (Docker + pfSense + Wazuh + CI) | Linux, containers, networking, security, DevOps, blue team | 🔄 28 Oct |
+| 01 | [Hardened, monitored web service](01-hardened-web-service/) (Docker + HTTPS from my own CA + login + pfSense + Wazuh + CI) · **2 days** | Every topic in stages 1–4: systems, Linux, networking, security fundamentals | 🔄 28–29 Oct |
 | 02 | Linux log detective: a Bash script that reports failed SSH logins, top source IPs and successes after failures | Linux, Bash, logs, blue team | Next |
 | 03 | Subnet calculator + lab inventory: Python (`ipaddress`) plus nmap XML parsed into a Markdown asset list | Networking, Python | Planned |
 | 04 | Build your own certificate authority with OpenSSL; HTTPS on mini-01; inspect the TLS handshake in Wireshark | Cryptography, PKI, TLS | Planned |
