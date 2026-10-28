@@ -1,10 +1,10 @@
-# CI for mini-project 01: lint the scripts, deploy the container, prove the hardening.
-name: mini-01 hardened web service
+# CI for extension E1: lint the scripts, deploy the container, prove the hardening.
+name: e1 hardened web service
 on:
   push:
-    paths: ["mini-projects/01-hardened-web-service/**", ".github/workflows/mini-01-web-service.yml"]
+    paths: ["mini-projects/e1-hardened-web-service/**", ".github/workflows/e1-web-service.yml"]
   pull_request:
-    paths: ["mini-projects/01-hardened-web-service/**"]
+    paths: ["mini-projects/e1-hardened-web-service/**"]
 permissions:
   contents: read
 jobs:
@@ -14,7 +14,7 @@ jobs:
       ADMIN_PASSWORD: ci-test-password-not-a-secret   # throwaway login, only for this test container
     defaults:
       run:
-        working-directory: mini-projects/01-hardened-web-service
+        working-directory: mini-projects/e1-hardened-web-service
     steps:
       - uses: actions/checkout@v5
       - name: Lint shell scripts

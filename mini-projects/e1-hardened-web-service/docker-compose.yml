@@ -1,4 +1,4 @@
-# Mini-project 01: a hardened, monitored web service
+# Extension E1: a hardened, monitored web service
 # Each security setting is explained in README.md, section 3.
 services:
   web:

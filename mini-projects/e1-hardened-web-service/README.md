@@ -1,4 +1,4 @@
-# Mini-project 01 · A hardened, monitored web service
+# Extension E1 · A hardened, monitored web service (optional, after mini-project 01)
 
 **One build that teaches every fundamental in stages 1–4:** a website in a locked-down Docker container on the Ubuntu DMZ server, served over HTTPS from my own certificate authority, with a password-protected admin page. I open it to Kali through pfSense, send its logs to Wazuh, attack it from Kali and detect the attack. GitHub Actions re-tests the hardening on every push.
 
@@ -70,7 +70,7 @@ flowchart LR
 | `deploy.sh` | Sets ownership, starts the container, waits until it's healthy. Safe to run again. |
 | `check.sh` | Proves every security setting (PASS/FAIL) |
 | `.env.example` | Server settings (copy to `.env`). `.env`, `tls/`, `auth/` and `logs/` are never committed. |
-| `../../.github/workflows/mini-01-web-service.yml` | CI: lint, create certs and login, deploy, run `check.sh` |
+| `../../.github/workflows/e1-web-service.yml` | CI: lint, create certs and login, deploy, run `check.sh` |
 
 ---
 
@@ -81,7 +81,7 @@ flowchart LR
 ```bash
 # On the Ubuntu DMZ server
 cd ~ && git clone https://github.com/emmanuelrukevwe123-lgtm/soc-home-lab.git    # or: cd ~/soc-home-lab && git pull
-cd ~/soc-home-lab/mini-projects/01-hardened-web-service
+cd ~/soc-home-lab/mini-projects/e1-hardened-web-service
 cp .env.example .env          # BIND_IP=10.0.2.10, LOG_DIR=/var/log/secure-web
 cat docker-compose.yml nginx.conf   # read before you run
 ./make-certs.sh               # your own CA + server certificate (to recreate later: sudo rm -rf tls, then run again)
@@ -187,7 +187,7 @@ From Kali:
 ```bash
 ssh <ubuntu-user>@10.0.2.10 'hostname; uptime'      # run one command over SSH, key-based
 sudo sshd -T | grep -E 'passwordauthentication|permitrootlogin|pubkeyauthentication'   # on Ubuntu: your hardening
-scp <ubuntu-user>@10.0.2.10:~/soc-home-lab/mini-projects/01-hardened-web-service/tls/ca.crt ~/lab-ca.crt   # copy the CA cert to Kali (you'll need it on day 2)
+scp <ubuntu-user>@10.0.2.10:~/soc-home-lab/mini-projects/e1-hardened-web-service/tls/ca.crt ~/lab-ca.crt   # copy the CA cert to Kali (you'll need it on day 2)
 ```
 **Lesson:** the server proves its identity with its **host key** (the fingerprint you accepted the first time); you prove yours with your **private key**. Passwords are off, so there's nothing to guess.
 
